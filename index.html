@@ -560,25 +560,45 @@
       }
     }
 
-    function speak(text, lang='ja-JP'){
-      if (!("speechSynthesis" in window) || !text) return;
-      try{
-        const u = new SpeechSynthesisUtterance(text);
-        u.lang = lang;
-        const voices = window.speechSynthesis.getVoices();
-        const jaVoice = voices.find(v => /^ja/i.test(v.lang));
-        if (jaVoice) u.voice = jaVoice;
-        u.rate = 0.95;
-        u.pitch = 1.0;
-        window.speechSynthesis.cancel();
-        window.speechSynthesis.speak(u);
-      }catch(err){
-        console.warn(err);
-        if (isLineBrowser()) {
-          alert('LINE 內建瀏覽器可能無法播放朗讀，請改用外部瀏覽器開啟。');
-        }
-      }
+function toKatakana(str){
+  return str.replace(/[\u3041-\u3096]/g, ch =>
+    String.fromCharCode(ch.charCodeAt(0) + 0x60)
+  );
+}
+
+function speak(text, lang = 'ja-JP'){
+  if (!('speechSynthesis' in window) || !text) return;
+
+  try{
+    // ✅ 將平假名轉成片假名，減少誤讀（例如 はなす 被念成 wanasu）
+    const speakText = toKatakana(text);
+
+    const u = new SpeechSynthesisUtterance(speakText);
+    u.lang = 'ja-JP';
+
+    const voices = window.speechSynthesis.getVoices();
+
+    // ✅ 優先精準抓 ja-JP，再退而求其次抓 ja*
+    const jaVoice =
+      voices.find(v => v.lang === 'ja-JP') ||
+      voices.find(v => v.lang && v.lang.toLowerCase().startsWith('ja')) ||
+      null;
+
+    if (jaVoice) u.voice = jaVoice;
+
+    u.rate = 0.9;
+    u.pitch = 1.0;
+
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(u);
+
+  }catch(err){
+    console.warn(err);
+    if (isLineBrowser()) {
+      alert('LINE 內建瀏覽器可能無法播放朗讀，請改用外部瀏覽器開啟。');
     }
+  }
+}
 
     function unlockAudio(){
       state.speechUnlocked = true;
