@@ -220,7 +220,28 @@
           </div>
 
           <div class="row">
-            <button id="unlockAudioBtn" class="warn">🔊 解鎖音訊（手機 / LINE 先按一次）</button>
+            <div id="lineAudioTip" style="display:none; margin-top:12px; text-align:center;">
+  <a id="openExternalBtn" href="#" style="
+    display:inline-block;
+    padding:12px 18px;
+    background:#16a34a;
+    color:#fff;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:bold;
+  ">
+    請改用瀏覽器開啟（LINE 內朗讀可能無聲）
+  </a>
+</div>
+<script>
+  const isLINE = /Line\//i.test(navigator.userAgent);
+  const tip = document.getElementById("lineAudioTip");
+  const btn = document.getElementById("openExternalBtn");
+  if(isLINE){
+    tip.style.display = "block";
+    btn.href = window.location.href;
+  }
+</script>
             <button id="nextBtn" class="primary">下一題</button>
             <button id="showBtn" class="secondary">顯示答案</button>
             <button id="speakBtn" class="ghost">朗讀題目</button>
