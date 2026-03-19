@@ -16,7 +16,6 @@
       --good:#127a4a;
       --warn:#9a5b00;
       --bad:#b42318;
-      --accent:#7c4dff;
       --shadow:0 10px 30px rgba(20,30,60,.10);
       --radius:18px;
     }
@@ -41,9 +40,7 @@
     h2{margin:0 0 10px;font-size:22px}
     h3{margin:0 0 8px;font-size:18px}
     .sub{color:var(--muted);font-size:14px;line-height:1.8}
-    .topNav{
-      display:flex;gap:10px;flex-wrap:wrap;margin-top:14px
-    }
+    .topNav{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
     .topNav a{
       text-decoration:none;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;font-weight:700
     }
@@ -62,17 +59,16 @@
       background:#f3f6ff;border:1px solid #dbe5ff;color:#365cb0;font-size:13px;font-weight:700;
     }
     .grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
-    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
     .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
     .row + .row{margin-top:10px}
     .modes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-    .modeBtn,.choiceBtn,.miniBtn{
+    .modeBtn,.choiceBtn{
       min-height:46px;padding:10px 12px;border-radius:14px;border:1px solid var(--line);
       background:#fff;color:var(--text);font:inherit;font-weight:800;cursor:pointer;
       transition:.15s transform ease,.15s background ease,.15s border-color ease,.15s color ease;
     }
-    .modeBtn:hover,.choiceBtn:hover,.miniBtn:hover,button:hover{transform:translateY(-1px)}
-    .modeBtn.active,.miniBtn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+    .modeBtn:hover,.choiceBtn:hover,button:hover{transform:translateY(-1px)}
+    .modeBtn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
     label.opt{
       display:flex;align-items:center;gap:8px;
       padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;
@@ -127,15 +123,13 @@
     .tagRow{display:flex;gap:8px;flex-wrap:wrap}
     .tag{padding:6px 10px;border-radius:999px;background:#f7f8fd;border:1px solid var(--line);font-size:12px;font-weight:700}
     .flashGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    .flashCard{
-      padding:14px;border-radius:16px;border:1px solid var(--line);background:#fff
-    }
+    .flashCard{padding:14px;border-radius:16px;border:1px solid var(--line);background:#fff}
     .footerNote{margin-top:12px;color:var(--muted);font-size:13px;line-height:1.8}
     .siteFooter{text-align:center;color:var(--muted);font-size:13px;padding:16px 0}
     @media (max-width:980px){
       .layout{grid-template-columns:1fr}
       .sidebar{position:relative;top:auto}
-      .grid2,.grid3{grid-template-columns:1fr}
+      .grid2{grid-template-columns:1fr}
       .modes{grid-template-columns:repeat(2,1fr)}
     }
     @media (max-width:640px){
@@ -152,7 +146,7 @@
   <div class="wrap">
     <section class="hero" id="top">
       <div class="pill">Japanese Verb Learning Site</div>
-      <h1>日文動詞學習網站</h1>
+      <h1>日文動詞學習網站 | Japanese Verb Trainer</h1>
       <div class="sub">
         這是一個可直接放到 GitHub Pages 的單頁式學習網站，整合了：<br>
         1. 動詞分類訓練　2. て形 / ない形 / た形練習　3. 規則總覽　4. 常用動詞速查表　5. 學習路線建議。
@@ -180,7 +174,7 @@
       <main class="content">
         <section class="card" id="trainer">
           <h2>1. 訓練區</h2>
-          <div class="sub">先做分類，再做變形。手機 / LINE 內若沒有聲音，先按一次「解鎖音訊」。</div>
+          <div class="sub">先做分類，再做變形。手機 / LINE 內若沒有聲音，可先按「解鎖音訊」；若仍無聲，再按綠色按鈕改用瀏覽器開啟。</div>
 
           <div class="modes" style="margin-top:12px">
             <button class="modeBtn active" data-mode="classify">分類訓練</button>
@@ -220,20 +214,14 @@
           </div>
 
           <div class="row">
-            <button id="unlockAudioBtn" class="warn" style="display:none;">🔊 解鎖音訊</button>
-<div id="lineAudioTip" style="display:none; margin-top:12px; text-align:center;">
-  <a id="openExternalBtn" href="#" style="
-    display:inline-block;
-    padding:12px 18px;
-    background:#16a34a;
-    color:#fff;
-    border-radius:10px;
-    text-decoration:none;
-    font-weight:bold;
-  ">
-    請改用瀏覽器開啟（LINE 內朗讀可能無聲）
-  </a>
-</div>
+            <button id="unlockAudioBtn" class="warn">🔊 解鎖音訊</button>
+
+            <div id="lineAudioTip" style="display:none; width:100%; margin-top:12px; text-align:center;">
+              <a id="openExternalBtn" href="#" style="display:inline-block;padding:12px 18px;background:#16a34a;color:#fff;border-radius:10px;text-decoration:none;font-weight:bold;">
+                請改用瀏覽器開啟（LINE 內朗讀可能無聲）
+              </a>
+            </div>
+
             <button id="nextBtn" class="primary">下一題</button>
             <button id="showBtn" class="secondary">顯示答案</button>
             <button id="speakBtn" class="ghost">朗讀題目</button>
@@ -416,9 +404,7 @@
               </tbody>
             </table>
           </div>
-          <div class="footerNote">
-            GitHub Pages 建議：把這個檔案命名為 <strong>index.html</strong> 放到 repo 根目錄，網站就能直接作為主入口。
-          </div>
+          <div class="footerNote">GitHub Pages 建議：把這個檔案命名為 <strong>index.html</strong> 放到 repo 根目錄，網站就能直接作為主入口。</div>
         </section>
       </main>
     </div>
@@ -550,6 +536,30 @@
       state.tickTimer = null;
     }
 
+    function isLineBrowser(){
+      return /Line\//i.test(navigator.userAgent) || /LIFF/i.test(navigator.userAgent);
+    }
+
+    function buildExternalUrl(){
+      const url = new URL(window.location.href);
+      url.searchParams.set('openExternalBrowser', '1');
+      return url.toString();
+    }
+
+    function setupLineExternalOpen(){
+      const tip = document.getElementById('lineAudioTip');
+      const btn = document.getElementById('openExternalBtn');
+      if (!tip || !btn) return;
+      if (isLineBrowser()) {
+        tip.style.display = 'block';
+        btn.href = buildExternalUrl();
+        btn.target = '_blank';
+        btn.rel = 'noopener noreferrer';
+      } else {
+        tip.style.display = 'none';
+      }
+    }
+
     function speak(text, lang='ja-JP'){
       if (!("speechSynthesis" in window) || !text) return;
       try{
@@ -559,9 +569,15 @@
         const jaVoice = voices.find(v => /^ja/i.test(v.lang));
         if (jaVoice) u.voice = jaVoice;
         u.rate = 0.95;
+        u.pitch = 1.0;
         window.speechSynthesis.cancel();
         window.speechSynthesis.speak(u);
-      }catch(err){ console.warn(err); }
+      }catch(err){
+        console.warn(err);
+        if (isLineBrowser()) {
+          alert('LINE 內建瀏覽器可能無法播放朗讀，請改用外部瀏覽器開啟。');
+        }
+      }
     }
 
     function unlockAudio(){
@@ -571,11 +587,19 @@
           const u = new SpeechSynthesisUtterance('あ');
           u.lang = 'ja-JP';
           u.volume = 0.01;
+          u.rate = 1;
+          u.pitch = 1;
           window.speechSynthesis.cancel();
           window.speechSynthesis.speak(u);
         }
-      }catch(err){ console.warn(err); }
-      setStatus('音訊已嘗試解鎖。若在 LINE 或手機瀏覽器內，之後再按朗讀通常就會恢復。', 'good');
+      }catch(err){
+        console.warn(err);
+      }
+      if (isLineBrowser()) {
+        setStatus('已嘗試解鎖音訊；若仍無聲，請按綠色按鈕改用瀏覽器開啟。', 'good');
+      } else {
+        setStatus('音訊已嘗試解鎖。', 'good');
+      }
     }
 
     function setStatus(msg, type=''){
@@ -662,8 +686,8 @@
 
     function showClassificationResult(isCorrect, chosen){
       const v = state.current;
-      el.answerBox.classList.remove('hidden');
       const clsMap = { godan:'五段動詞', ichidan:'一段動詞', irregular:'不規則動詞' };
+      el.answerBox.classList.remove('hidden');
       el.answerMain.textContent = `${clsMap[v.cls]}`;
       const zh = el.showMeaning.checked ? ` ｜ 中文：${v.zh}` : '';
       el.answerSub.textContent = `原形：${v.base} ｜ ${v.yomi} ｜ ${v.roma} ｜ 規則：${v.note}${zh}`;
@@ -758,16 +782,6 @@
     if (el.unlockAudioBtn) {
       el.unlockAudioBtn.addEventListener('click', unlockAudio);
     }
-
-    const isLINE = /Line\//i.test(navigator.userAgent);
-    const lineAudioTip = document.getElementById('lineAudioTip');
-    const openExternalBtn = document.getElementById('openExternalBtn');
-    if (isLINE && lineAudioTip && openExternalBtn) {
-      lineAudioTip.style.display = 'block';
-      openExternalBtn.href = window.location.href;
-      openExternalBtn.setAttribute('target', '_blank');
-      openExternalBtn.setAttribute('rel', 'noopener noreferrer');
-    }
     el.nextBtn.addEventListener('click', nextQuestion);
     el.showBtn.addEventListener('click', () => renderAnswer('manual'));
     el.speakBtn.addEventListener('click', () => {
@@ -782,7 +796,10 @@
       speak(t.yomi, 'ja-JP');
     });
     el.resetBtn.addEventListener('click', resetStats);
-    el.packSelect.addEventListener('change', () => { updateBadge(); setStatus('題庫範圍已切換。', 'good'); });
+    el.packSelect.addEventListener('change', () => {
+      updateBadge();
+      setStatus('題庫範圍已切換。', 'good');
+    });
 
     document.addEventListener('visibilitychange', () => {
       if (document.hidden && 'speechSynthesis' in window){
@@ -790,15 +807,20 @@
       }
     });
 
-    if ('speechSynthesis' in window){
-      try{ window.speechSynthesis.getVoices(); }catch(err){}
-    }
-
-    renderVerbList();
-    updateBadge();
-    updateKPI();
-    el.showBtn.disabled = true;
-    el.speakAnsBtn.disabled = true;
+    document.addEventListener('DOMContentLoaded', () => {
+      setupLineExternalOpen();
+      document.addEventListener('click', () => {
+        unlockAudio();
+      }, { once: true });
+      renderVerbList();
+      updateBadge();
+      updateKPI();
+      el.showBtn.disabled = true;
+      el.speakAnsBtn.disabled = true;
+      if ('speechSynthesis' in window){
+        try{ window.speechSynthesis.getVoices(); }catch(err){}
+      }
+    });
   </script>
 </body>
 </html>
