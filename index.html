@@ -220,7 +220,8 @@
           </div>
 
           <div class="row">
-            <div id="lineAudioTip" style="display:none; margin-top:12px; text-align:center;">
+            <button id="unlockAudioBtn" class="warn" style="display:none;">🔊 解鎖音訊</button>
+<div id="lineAudioTip" style="display:none; margin-top:12px; text-align:center;">
   <a id="openExternalBtn" href="#" style="
     display:inline-block;
     padding:12px 18px;
@@ -233,15 +234,6 @@
     請改用瀏覽器開啟（LINE 內朗讀可能無聲）
   </a>
 </div>
-<script>
-  const isLINE = /Line\//i.test(navigator.userAgent);
-  const tip = document.getElementById("lineAudioTip");
-  const btn = document.getElementById("openExternalBtn");
-  if(isLINE){
-    tip.style.display = "block";
-    btn.href = window.location.href;
-  }
-</script>
             <button id="nextBtn" class="primary">下一題</button>
             <button id="showBtn" class="secondary">顯示答案</button>
             <button id="speakBtn" class="ghost">朗讀題目</button>
@@ -763,7 +755,19 @@
       });
     });
 
-    el.unlockAudioBtn.addEventListener('click', unlockAudio);
+    if (el.unlockAudioBtn) {
+      el.unlockAudioBtn.addEventListener('click', unlockAudio);
+    }
+
+    const isLINE = /Line\//i.test(navigator.userAgent);
+    const lineAudioTip = document.getElementById('lineAudioTip');
+    const openExternalBtn = document.getElementById('openExternalBtn');
+    if (isLINE && lineAudioTip && openExternalBtn) {
+      lineAudioTip.style.display = 'block';
+      openExternalBtn.href = window.location.href;
+      openExternalBtn.setAttribute('target', '_blank');
+      openExternalBtn.setAttribute('rel', 'noopener noreferrer');
+    }
     el.nextBtn.addEventListener('click', nextQuestion);
     el.showBtn.addEventListener('click', () => renderAnswer('manual'));
     el.speakBtn.addEventListener('click', () => {
