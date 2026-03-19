@@ -600,27 +600,31 @@ function speak(text, lang = 'ja-JP'){
   }
 }
 
-    function unlockAudio(){
-      state.speechUnlocked = true;
-      try{
-        if ('speechSynthesis' in window){
-          const u = new SpeechSynthesisUtterance('あ');
-          u.lang = 'ja-JP';
-          u.volume = 0.01;
-          u.rate = 1;
-          u.pitch = 1;
-          window.speechSynthesis.cancel();
-          window.speechSynthesis.speak(u);
-        }
-      }catch(err){
-        console.warn(err);
-      }
-      if (isLineBrowser()) {
-        setStatus('已嘗試解鎖音訊；若仍無聲，請按綠色按鈕改用瀏覽器開啟。', 'good');
-      } else {
-        setStatus('音訊已嘗試解鎖。', 'good');
-      }
+function unlockAudio(){
+  if (state.speechUnlocked) return;
+
+  state.speechUnlocked = true;
+
+  try{
+    if ('speechSynthesis' in window){
+      const u = new SpeechSynthesisUtterance(' ');
+      u.lang = 'ja-JP';
+      u.volume = 0;
+      u.rate = 1;
+      u.pitch = 1;
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(u);
     }
+  }catch(err){
+    console.warn(err);
+  }
+
+  if (isLineBrowser()) {
+    setStatus('已嘗試解鎖音訊；若仍無聲，請按綠色按鈕改用瀏覽器開啟。', 'good');
+  } else {
+    setStatus('音訊已嘗試解鎖。', 'good');
+  }
+}
 
     function setStatus(msg, type=''){
       el.statusBox.className = 'status' + (type ? ` ${type}` : '');
@@ -753,17 +757,26 @@ function speak(text, lang = 'ja-JP'){
       }
     }
 
-    function nextQuestion(){
-      clearTimers();
-      state.current = pickOne();
-      state.total++;
-      updateKPI();
-      renderQuestion(state.current);
-      startCountdownAndMaybeReveal();
-      if (el.autoPlay.checked && state.speechUnlocked){
-        setTimeout(() => speak(state.current.yomi, 'ja-JP'), 80);
-      }
-    }
+function nextQuestion(){
+  clearTimers();
+
+  // ✅ 第一次按開始 / 下一題時，先解鎖
+  if (!state.speechUnlocked) {
+    unlockAudio();
+  }
+
+  state.current = pickOne();
+  state.total++;
+  updateKPI();
+  renderQuestion(state.current);
+  startCountdownAndMaybeReveal();
+
+  if (el.autoPlay.checked && state.speechUnlocked){
+    // ✅ 第一次題目延遲久一點，避免和 unlockAudio 衝突
+    const delay = state.total === 1 ? 300 : 80;
+    setTimeout(() => speak(state.current.yomi, 'ja-JP'), delay);
+  }
+}
 
     function resetStats(){
       state.total = 0;
@@ -829,9 +842,7 @@ function speak(text, lang = 'ja-JP'){
 
     document.addEventListener('DOMContentLoaded', () => {
       setupLineExternalOpen();
-      document.addEventListener('click', () => {
-        unlockAudio();
-      }, { once: true });
+
       renderVerbList();
       updateBadge();
       updateKPI();
