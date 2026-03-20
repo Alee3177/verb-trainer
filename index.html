@@ -6,140 +6,39 @@
   <title>日文動詞學習網站｜Japanese Verb Trainer</title>
   <style>
     :root{
-      --bg:#f6f7fb;
-      --card:#ffffff;
-      --text:#172033;
-      --muted:#5b6475;
-      --line:#d9deea;
-      --primary:#2b6ef3;
-      --primary-2:#eaf1ff;
-      --good:#127a4a;
-      --warn:#9a5b00;
-      --bad:#b42318;
-      --shadow:0 10px 30px rgba(20,30,60,.10);
-      --radius:18px;
+      --bg:#f6f7fb;--card:#ffffff;--text:#172033;--muted:#5b6475;--line:#d9deea;
+      --primary:#2b6ef3;--primary-2:#eaf1ff;--good:#127a4a;--warn:#9a5b00;--bad:#b42318;
+      --shadow:0 10px 30px rgba(20,30,60,.10);--radius:18px;
     }
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
-      background:linear-gradient(180deg,#f8faff 0%, #f4f5fa 100%);
-      color:var(--text);
-    }
-    a{color:inherit}
-    .wrap{max-width:1180px;margin:0 auto;padding:18px 14px 42px}
-    .hero, .card{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:24px;
-      box-shadow:var(--shadow);
-    }
-    .hero{padding:22px;margin-bottom:14px}
-    h1{margin:0 0 10px;font-size:32px;line-height:1.15}
-    h2{margin:0 0 10px;font-size:22px}
-    h3{margin:0 0 8px;font-size:18px}
-    .sub{color:var(--muted);font-size:14px;line-height:1.8}
-    .topNav{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    .topNav a{
-      text-decoration:none;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;font-weight:700
-    }
-    .layout{display:grid;grid-template-columns:240px 1fr;gap:14px}
-    .sidebar{position:sticky;top:12px;height:fit-content;padding:14px}
-    .sideTitle{font-size:13px;color:var(--muted);margin-bottom:10px;font-weight:800;letter-spacing:.04em}
-    .sideMenu{display:grid;gap:8px}
-    .sideMenu a{
-      text-decoration:none;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:#fff;font-weight:700
-    }
-    .content{display:grid;gap:14px}
-    .card{padding:16px}
-    .pill{
-      display:inline-flex;align-items:center;justify-content:center;
-      min-height:34px;padding:6px 12px;border-radius:999px;
-      background:#f3f6ff;border:1px solid #dbe5ff;color:#365cb0;font-size:13px;font-weight:700;
-    }
-    .grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
-    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-    .row + .row{margin-top:10px}
-    .modes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-    .modeBtn,.choiceBtn{
-      min-height:46px;padding:10px 12px;border-radius:14px;border:1px solid var(--line);
-      background:#fff;color:var(--text);font:inherit;font-weight:800;cursor:pointer;
-      transition:.15s transform ease,.15s background ease,.15s border-color ease,.15s color ease;
-    }
-    .modeBtn:hover,.choiceBtn:hover,button:hover{transform:translateY(-1px)}
-    .modeBtn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
-    label.opt{
-      display:flex;align-items:center;gap:8px;
-      padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;
-      min-height:44px;
-    }
-    input[type="checkbox"]{transform:scale(1.08)}
-    select,button,input[type="text"]{
-      font:inherit;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:#fff;
-      color:var(--text);
-      min-height:44px;
-      padding:0 12px;
-    }
-    button{cursor:pointer;font-weight:700;transition:.15s transform ease,.15s opacity ease,.15s background ease}
-    button:active{transform:translateY(0)}
-    button.primary{background:var(--primary);color:#fff;border-color:var(--primary)}
-    button.secondary{background:var(--primary-2);color:var(--primary);border-color:#cfe0ff}
-    button.ghost{background:#fff}
-    button.warn{background:#fff7eb;border-color:#f1d19c;color:var(--warn)}
-    button[disabled]{opacity:.45;cursor:not-allowed;transform:none}
-    .stage{text-align:center;padding:8px 6px 6px}
-    .countdown{font-size:18px;color:var(--warn);font-weight:800;margin:10px 0 0}
-    .big{font-size:clamp(40px, 8vw, 72px);line-height:1.1;font-weight:900;letter-spacing:.02em;margin:14px 0 6px}
-    .reading{font-size:20px;color:var(--muted);margin:0 0 10px}
-    .answerBox{
-      margin:12px auto 0;max-width:820px;padding:14px;border-radius:16px;border:1px dashed #b8c5e6;background:#fbfcff;
-    }
-    .answerMain{font-size:clamp(24px, 6vw, 40px);font-weight:900;margin:0 0 6px}
-    .answerSub{color:var(--muted);line-height:1.8}
-    .hidden{display:none !important}
-    .status{
-      margin-top:10px;padding:10px 12px;border-radius:12px;font-size:14px;line-height:1.7;
-      background:#f7f9fc;border:1px solid var(--line);color:var(--muted);
-    }
-    .status.good{background:#ecfdf3;border-color:#abefc6;color:var(--good)}
-    .status.bad{background:#fef3f2;border-color:#fecdca;color:var(--bad)}
-    .choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:820px;margin:12px auto 0}
-    .choiceBtn.correct{background:#ecfdf3;border-color:#abefc6;color:var(--good)}
-    .choiceBtn.wrong{background:#fef3f2;border-color:#fecdca;color:var(--bad)}
-    .kpi{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:12px}
-    .k{background:#f8faff;border:1px solid #dce5fb;border-radius:14px;padding:12px;text-align:center}
-    .k .n{font-size:28px;font-weight:900;line-height:1.1}
-    .k .t{color:var(--muted);font-size:13px;margin-top:4px}
-    .tableWrap{overflow:auto;border:1px solid var(--line);border-radius:14px;margin-top:12px}
-    table{width:100%;border-collapse:collapse;background:#fff}
-    th,td{padding:10px 12px;border-bottom:1px solid #edf0f6;text-align:left;vertical-align:top}
-    th{background:#f7f9fd;font-size:14px}
-    td{font-size:14px;line-height:1.7}
-    .muted{color:var(--muted)}
-    .tagRow{display:flex;gap:8px;flex-wrap:wrap}
-    .tag{padding:6px 10px;border-radius:999px;background:#f7f8fd;border:1px solid var(--line);font-size:12px;font-weight:700}
-    .flashGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
-    .flashCard{padding:14px;border-radius:16px;border:1px solid var(--line);background:#fff}
-    .footerNote{margin-top:12px;color:var(--muted);font-size:13px;line-height:1.8}
-    .siteFooter{text-align:center;color:var(--muted);font-size:13px;padding:16px 0}
-    @media (max-width:980px){
-      .layout{grid-template-columns:1fr}
-      .sidebar{position:relative;top:auto}
-      .grid2{grid-template-columns:1fr}
-      .modes{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width:640px){
-      h1{font-size:26px}
-      .choices,.modes,.kpi,.flashGrid{grid-template-columns:1fr}
-      .row{flex-direction:column;align-items:stretch}
-      .row>*{width:100%}
-      label.opt{width:100%}
-      .topNav{display:grid;grid-template-columns:1fr 1fr}
-    }
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;background:linear-gradient(180deg,#f8faff 0%, #f4f5fa 100%);color:var(--text)}
+    a{color:inherit}.wrap{max-width:1180px;margin:0 auto;padding:18px 14px 42px}
+    .hero,.card{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow)}
+    .hero{padding:22px;margin-bottom:14px} h1{margin:0 0 10px;font-size:32px;line-height:1.15} h2{margin:0 0 10px;font-size:22px} h3{margin:0 0 8px;font-size:18px}
+    .sub{color:var(--muted);font-size:14px;line-height:1.8}.sub.alert{color:red}
+    .topNav{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.topNav a{text-decoration:none;padding:10px 14px;border:1px solid var(--line);border-radius:999px;background:#fff;font-weight:700}
+    .layout{display:grid;grid-template-columns:240px 1fr;gap:14px}.sidebar{position:sticky;top:12px;height:fit-content;padding:14px}
+    .sideTitle{font-size:13px;color:var(--muted);margin-bottom:10px;font-weight:800;letter-spacing:.04em}.sideMenu{display:grid;gap:8px}
+    .sideMenu a{text-decoration:none;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:#fff;font-weight:700}.content{display:grid;gap:14px}.card{padding:16px}
+    .pill{display:inline-flex;align-items:center;justify-content:center;min-height:34px;padding:6px 12px;border-radius:999px;background:#f3f6ff;border:1px solid #dbe5ff;color:#365cb0;font-size:13px;font-weight:700}
+    .grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.row + .row{margin-top:10px}.modes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+    .modeBtn,.choiceBtn{min-height:46px;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:#fff;color:var(--text);font:inherit;font-weight:800;cursor:pointer;transition:.15s transform ease,.15s background ease,.15s border-color ease,.15s color ease}
+    .modeBtn:hover,.choiceBtn:hover,button:hover{transform:translateY(-1px)} .modeBtn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+    label.opt{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;min-height:44px}
+    input[type="checkbox"]{transform:scale(1.08)} select,button,input[type="text"]{font:inherit;border-radius:12px;border:1px solid var(--line);background:#fff;color:var(--text);min-height:44px;padding:0 12px}
+    button{cursor:pointer;font-weight:700;transition:.15s transform ease,.15s opacity ease,.15s background ease} button:active{transform:translateY(0)}
+    button.primary{background:var(--primary);color:#fff;border-color:var(--primary)} button.secondary{background:var(--primary-2);color:var(--primary);border-color:#cfe0ff} button.ghost{background:#fff} button.warn{background:#fff7eb;border-color:#f1d19c;color:var(--warn)} button[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+    .stage{text-align:center;padding:8px 6px 6px}.countdown{font-size:18px;color:var(--warn);font-weight:800;margin:10px 0 0}.big{font-size:clamp(40px, 8vw, 72px);line-height:1.1;font-weight:900;letter-spacing:.02em;margin:14px 0 6px}.reading{font-size:20px;color:var(--muted);margin:0 0 10px}
+    .answerBox{margin:12px auto 0;max-width:820px;padding:14px;border-radius:16px;border:1px dashed #b8c5e6;background:#fbfcff}.answerMain{font-size:clamp(24px, 6vw, 40px);font-weight:900;margin:0 0 6px}.answerSub{color:var(--muted);line-height:1.8}.hidden{display:none !important}
+    .status{margin-top:10px;padding:10px 12px;border-radius:12px;font-size:14px;line-height:1.7;background:#f7f9fc;border:1px solid var(--line);color:var(--muted)} .status.good{background:#ecfdf3;border-color:#abefc6;color:var(--good)} .status.bad{background:#fef3f2;border-color:#fecdca;color:var(--bad)}
+    .choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:820px;margin:12px auto 0}.choiceBtn.correct{background:#ecfdf3;border-color:#abefc6;color:var(--good)} .choiceBtn.wrong{background:#fef3f2;border-color:#fecdca;color:var(--bad)}
+    .kpi{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-top:12px}.k{background:#f8faff;border:1px solid #dce5fb;border-radius:14px;padding:12px;text-align:center}.k .n{font-size:28px;font-weight:900;line-height:1.1}.k .t{color:var(--muted);font-size:13px;margin-top:4px}
+    .tableWrap{overflow:auto;border:1px solid var(--line);border-radius:14px;margin-top:12px} table{width:100%;border-collapse:collapse;background:#fff} th,td{padding:10px 12px;border-bottom:1px solid #edf0f6;text-align:left;vertical-align:top} th{background:#f7f9fd;font-size:14px} td{font-size:14px;line-height:1.7}
+    .muted{color:var(--muted)} .tagRow{display:flex;gap:8px;flex-wrap:wrap}.tag{padding:6px 10px;border-radius:999px;background:#f7f8fd;border:1px solid var(--line);font-size:12px;font-weight:700}
+    .flashGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.flashCard{padding:14px;border-radius:16px;border:1px solid var(--line);background:#fff}.footerNote{margin-top:12px;color:var(--muted);font-size:13px;line-height:1.8}.siteFooter{text-align:center;color:var(--muted);font-size:13px;padding:16px 0}
+    .listenMask{font-size:16px;color:#7a5a00;background:#fff7db;border:1px dashed #e7c56d;border-radius:14px;padding:10px 12px;max-width:560px;margin:8px auto 0}
+    @media (max-width:980px){.layout{grid-template-columns:1fr}.sidebar{position:relative;top:auto}.grid2{grid-template-columns:1fr}.modes{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){h1{font-size:26px}.choices,.modes,.kpi,.flashGrid{grid-template-columns:1fr}.row{flex-direction:column;align-items:stretch}.row>*{width:100%}label.opt{width:100%}.topNav{display:grid;grid-template-columns:1fr 1fr}}
   </style>
 </head>
 <body>
@@ -147,15 +46,9 @@
     <section class="hero" id="top">
       <div class="pill">Japanese Verb Learning Site</div>
       <h1>日文動詞學習網站 | Japanese Verb Trainer</h1>
-      <div class="sub">
-        這整合了：1. 動詞分類訓練　2. て形 / ない形 / た形練習  3. 規則總覽　4. 常用動詞速查表　5. 學習路線建議。 <br>
-
-      </div>
+      <div class="sub">這是一個可直接放到 GitHub Pages 的單頁式學習網站，整合了：1. 動詞分類訓練　2. て形 / ない形 / た形練習　3. 聽力模式　4. 錯題自動重複訓練　5. 規則總覽。</div>
       <div class="topNav">
-        <a href="#trainer">訓練區</a>
-        <a href="#guide">規則總覽</a>
-        <a href="#list">常用動詞表</a>
-        <a href="#plan">學習路線</a>
+        <a href="#trainer">訓練區</a><a href="#guide">規則總覽</a><a href="#list">常用動詞表</a><a href="#plan">學習路線</a>
       </div>
     </section>
 
@@ -163,19 +56,15 @@
       <aside class="card sidebar">
         <div class="sideTitle">學習導覽</div>
         <div class="sideMenu">
-          <a href="#trainer">1. 訓練區</a>
-          <a href="#guide">2. 動詞規則總覽</a>
-          <a href="#list">3. 常用動詞清單</a>
-          <a href="#flash">4. 快速記憶卡</a>
-          <a href="#plan">5. 學習路線</a>
+          <a href="#trainer">1. 訓練區</a><a href="#guide">2. 動詞規則總覽</a><a href="#list">3. 常用動詞清單</a><a href="#flash">4. 快速記憶卡</a><a href="#plan">5. 學習路線</a>
         </div>
       </aside>
 
       <main class="content">
         <section class="card" id="trainer">
           <h2>1. 訓練區</h2>
-          <div class="sub" style="color:red;">先做分類，再做變形。手機 / LINE 內若沒有聲音，先按一次「解鎖音訊」；若仍無聲，再按綠色按鈕改用瀏覽器開啟。</div>
-          
+          <div class="sub alert">先做分類，再做變形。手機 / LINE 內若沒有聲音，可先按「解鎖音訊」；若仍無聲，再按綠色按鈕改用瀏覽器開啟。</div>
+
           <div class="modes" style="margin-top:12px">
             <button class="modeBtn active" data-mode="classify">分類訓練</button>
             <button class="modeBtn" data-mode="te">て形</button>
@@ -185,44 +74,32 @@
 
           <div class="row" style="margin-top:12px">
             <label class="opt"><input type="checkbox" id="autoPlay" checked> 自動播放日文</label>
-            <label class="opt"><input type="checkbox" id="autoReveal"> 倒數後自動顯示答案</label>
+            <label class="opt"><input type="checkbox" id="autoReveal" checked> 顯示答案後再跳</label>
             <label class="opt"><input type="checkbox" id="loopMode"> 自動下一題</label>
             <label class="opt"><input type="checkbox" id="showMeaning" checked> 顯示中文</label>
+            <label class="opt"><input type="checkbox" id="listeningMode"> 聽力模式（先不顯示字）</label>
+            <label class="opt"><input type="checkbox" id="wrongRepeatMode"> 錯題自動重複訓練</label>
           </div>
 
           <div class="row">
             <label class="opt" style="flex:1"><span>題庫範圍：</span>
               <select id="packSelect" style="width:100%">
-                <option value="mixed">綜合題庫（全部）</option>
-                <option value="godan_only">五段動詞</option>
-                <option value="ichidan_only">一段動詞</option>
-                <option value="irregular_only">不規則動詞</option>
-                <option value="u_tsu_ru">う／つ／る 系</option>
-                <option value="bu_mu_nu">ぶ／む／ぬ 系</option>
-                <option value="ku_gu_su">く／ぐ／す 系</option>
+                <option value="mixed">綜合題庫（全部）</option><option value="godan_only">五段動詞</option><option value="ichidan_only">一段動詞</option><option value="irregular_only">不規則動詞</option><option value="u_tsu_ru">う／つ／る 系</option><option value="bu_mu_nu">ぶ／む／ぬ 系</option><option value="ku_gu_su">く／ぐ／す 系</option>
               </select>
             </label>
             <label class="opt" style="flex:1"><span>作答倒數：</span>
               <select id="countSelect" style="width:100%">
-                <option value="500">0.5 秒</option>
-                <option value="800">0.8 秒</option>
-                <option value="1000">1.0 秒</option>
-                <option value="1500">1.5 秒</option>
-                <option value="2000">2.0 秒</option>
+                <option value="500">0.5 秒</option><option value="800">0.8 秒</option><option value="1000">1.0 秒</option><option value="1500">1.5 秒</option><option value="2000">2.0 秒</option>
               </select>
             </label>
           </div>
 
           <div class="row">
             <button id="unlockAudioBtn" class="warn">🔊 解鎖音訊</button>
-
             <div id="lineAudioTip" style="display:none; width:100%; margin-top:12px; text-align:center;">
-              <a id="openExternalBtn" href="#" style="display:inline-block;padding:12px 18px;background:#16a34a;color:#fff;border-radius:10px;text-decoration:none;font-weight:bold;">
-                請改用瀏覽器開啟（LINE 內朗讀可能無聲）
-              </a>
+              <a id="openExternalBtn" href="#" style="display:inline-block;padding:12px 18px;background:#16a34a;color:#fff;border-radius:10px;text-decoration:none;font-weight:bold;">請改用瀏覽器開啟（LINE 內朗讀可能無聲）</a>
             </div>
-
-            <button id="nextBtn" class="primary">開始/ 下一題</button>
+            <button id="nextBtn" class="primary">開始 / 下一題</button>
             <button id="showBtn" class="secondary">顯示答案</button>
             <button id="speakBtn" class="ghost" style="color:red;">朗讀題目</button>
             <button id="speakAnsBtn" class="ghost">朗讀答案</button>
@@ -231,7 +108,8 @@
 
           <div class="stage">
             <div class="pill" id="typeBadge">模式：分類訓練｜題型：綜合題庫</div>
-            <div class="countdown" id="countdownText">請按「開始/ 下一題」開始</div>
+            <div class="countdown" id="countdownText">請按「開始 / 下一題」開始</div>
+            <div id="listenMask" class="listenMask hidden">🎧 聽力模式中：先聽音，再作答。題目文字暫時隱藏。</div>
             <div class="big" id="verbText">—</div>
             <div class="reading" id="readingText">—</div>
 
@@ -241,15 +119,8 @@
               <button class="choiceBtn" data-choice="irregular">不規則動詞</button>
             </div>
 
-            <div id="answerBox" class="answerBox hidden">
-              <div class="answerMain" id="answerMain">—</div>
-              <div class="answerSub" id="answerSub">—</div>
-            </div>
-
-            <div id="statusBox" class="status">
-              分類模式：先看動詞原形，判斷是五段／一段／不規則。<br>
-              變形模式：先自己在倒數內作答，再顯示答案核對。
-            </div>
+            <div id="answerBox" class="answerBox hidden"><div class="answerMain" id="answerMain">—</div><div class="answerSub" id="answerSub">—</div></div>
+            <div id="statusBox" class="status">分類模式：先看動詞原形，判斷是五段／一段／不規則。<br>變形模式：先自己在倒數內作答，再顯示答案核對。</div>
           </div>
 
           <div class="kpi">
@@ -258,157 +129,27 @@
             <div class="k"><div class="n" id="kWrong">0</div><div class="t">答錯</div></div>
             <div class="k"><div class="n" id="kAuto">0</div><div class="t">自動顯示</div></div>
             <div class="k"><div class="n" id="kManual">0</div><div class="t">手動顯示</div></div>
+            <div class="k"><div class="n" id="kWrongPool">0</div><div class="t">錯題池</div></div>
+            <div class="k"><div class="n" id="kRepeatUsed">0</div><div class="t">重複出題</div></div>
           </div>
         </section>
 
         <section class="card" id="guide">
           <h2>2. 動詞規則總覽</h2>
           <div class="grid2">
-            <div>
-              <h3>動詞三大類</h3>
-              <div class="tableWrap">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>類型</th>
-                      <th>日文</th>
-                      <th>平假名 / 羅馬拼音</th>
-                      <th>中文</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>五段動詞</td><td>書く / 読む / 話す</td><td>かく (kaku) / よむ (yomu) / はなす (hanasu)</td><td>寫 / 讀 / 說</td></tr>
-                    <tr><td>一段動詞</td><td>食べる / 見る / 寝る</td><td>たべる (taberu) / みる (miru) / ねる (neru)</td><td>吃 / 看 / 睡</td></tr>
-                    <tr><td>不規則動詞</td><td>する / 来る</td><td>する (suru) / くる (kuru)</td><td>做 / 來</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div>
-              <h3>五段動詞口訣</h3>
-              <div class="tableWrap">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>口訣</th>
-                      <th>規則</th>
-                      <th>例子</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td>一起立</td><td>う／つ／る → って</td><td>会う → 会って、待つ → 待って、取る → 取って</td></tr>
-                    <tr><td>你咪咪</td><td>ぶ／む／ぬ → んで</td><td>遊ぶ → 遊んで、読む → 読んで、死ぬ → 死んで</td></tr>
-                    <tr><td>く行</td><td>く → いて</td><td>書く → 書いて、聞く → 聞いて</td></tr>
-                    <tr><td>ぐ行</td><td>ぐ → いで</td><td>泳ぐ → 泳いで、急ぐ → 急いで</td></tr>
-                    <tr><td>す行</td><td>す → して</td><td>話す → 話して、貸す → 貸して</td></tr>
-                    <tr><td>例外</td><td>行く → 行って</td><td>行く → 行って</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-
-          <div class="tableWrap" style="margin-top:14px">
-            <table>
-              <thead>
-                <tr>
-                  <th>變化類型</th>
-                  <th>規則</th>
-                  <th>例子</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>て形</td><td>連接、請求、順接</td><td>書いて、食べて、来て</td></tr>
-                <tr><td>ない形</td><td>否定</td><td>書かない、食べない、来ない</td></tr>
-                <tr><td>た形</td><td>過去</td><td>書いた、食べた、来た</td></tr>
-              </tbody>
-            </table>
+            <div><h3>動詞三大類</h3><div class="tableWrap"><table><thead><tr><th>類型</th><th>日文</th><th>平假名 / 羅馬拼音</th><th>中文</th></tr></thead><tbody><tr><td>五段動詞</td><td>書く / 読む / 話す</td><td>かく (kaku) / よむ (yomu) / はなす (hanasu)</td><td>寫 / 讀 / 說</td></tr><tr><td>一段動詞</td><td>食べる / 見る / 寝る</td><td>たべる (taberu) / みる (miru) / ねる (neru)</td><td>吃 / 看 / 睡</td></tr><tr><td>不規則動詞</td><td>する / 来る</td><td>する (suru) / くる (kuru)</td><td>做 / 來</td></tr></tbody></table></div></div>
+            <div><h3>五段動詞口訣</h3><div class="tableWrap"><table><thead><tr><th>口訣</th><th>規則</th><th>例子</th></tr></thead><tbody><tr><td>一起立</td><td>う／つ／る → って</td><td>会う → 会って、待つ → 待って、取る → 取って</td></tr><tr><td>你咪咪</td><td>ぶ／む／ぬ → んで</td><td>遊ぶ → 遊んで、読む → 読んで、死ぬ → 死んで</td></tr><tr><td>く行</td><td>く → いて</td><td>書く → 書いて、聞く → 聞いて</td></tr><tr><td>ぐ行</td><td>ぐ → いで</td><td>泳ぐ → 泳いで、急ぐ → 急いで</td></tr><tr><td>す行</td><td>す → して</td><td>話す → 話して、貸す → 貸して</td></tr><tr><td>例外</td><td>行く → 行って</td><td>行く → 行って</td></tr></tbody></table></div></div>
           </div>
         </section>
 
-        <section class="card" id="list">
-          <h2>3. 常用動詞清單</h2>
-          <div class="sub">這裡整理成三欄對照：日文 / 平假名・羅馬拼音 / 中文。</div>
-          <div class="tableWrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>日文</th>
-                  <th>平假名 / 羅馬拼音</th>
-                  <th>中文</th>
-                </tr>
-              </thead>
-              <tbody id="verbListBody"></tbody>
-            </table>
-          </div>
-        </section>
+        <section class="card" id="list"><h2>3. 常用動詞清單</h2><div class="sub">依照你的要求，這裡整理成三欄對照：日文 / 平假名・羅馬拼音 / 中文。</div><div class="tableWrap"><table><thead><tr><th>日文</th><th>平假名 / 羅馬拼音</th><th>中文</th></tr></thead><tbody id="verbListBody"></tbody></table></div></section>
 
-        <section class="card" id="flash">
-          <h2>4. 快速記憶卡</h2>
-          <div class="flashGrid">
-            <div class="flashCard">
-              <h3>五段動詞</h3>
-              <div class="tagRow">
-                <div class="tag">尾音會變</div>
-                <div class="tag">最常見</div>
-                <div class="tag">要先分類</div>
-              </div>
-              <p class="muted">例：書く、読む、話す、待つ、取る、帰る</p>
-            </div>
-            <div class="flashCard">
-              <h3>一段動詞</h3>
-              <div class="tagRow">
-                <div class="tag">多為 る 結尾</div>
-                <div class="tag">多半去る</div>
-                <div class="tag">較規則</div>
-              </div>
-              <p class="muted">例：食べる、見る、起きる、寝る</p>
-            </div>
-            <div class="flashCard">
-              <h3>不規則動詞</h3>
-              <div class="tagRow">
-                <div class="tag">數量少</div>
-                <div class="tag">直接記</div>
-              </div>
-              <p class="muted">例：する、来る</p>
-            </div>
-            <div class="flashCard">
-              <h3>學習順序</h3>
-              <div class="tagRow">
-                <div class="tag">分類</div>
-                <div class="tag">て形</div>
-                <div class="tag">ない形</div>
-                <div class="tag">た形</div>
-              </div>
-              <p class="muted">先判斷，再變形，效率最高。</p>
-            </div>
-          </div>
-        </section>
+        <section class="card" id="flash"><h2>4. 快速記憶卡</h2><div class="flashGrid"><div class="flashCard"><h3>五段動詞</h3><div class="tagRow"><div class="tag">尾音會變</div><div class="tag">最常見</div><div class="tag">要先分類</div></div><p class="muted">例：書く、読む、話す、待つ、取る、帰る</p></div><div class="flashCard"><h3>一段動詞</h3><div class="tagRow"><div class="tag">多為 る 結尾</div><div class="tag">多半去る</div><div class="tag">較規則</div></div><p class="muted">例：食べる、見る、起きる、寝る</p></div><div class="flashCard"><h3>不規則動詞</h3><div class="tagRow"><div class="tag">數量少</div><div class="tag">直接記</div></div><p class="muted">例：する、来る</p></div><div class="flashCard"><h3>新模式</h3><div class="tagRow"><div class="tag">錯題重複</div><div class="tag">聽力模式</div><div class="tag">自動下一題</div></div><p class="muted">適合刷題與聽力反應訓練。</p></div></div></section>
 
-        <section class="card" id="plan">
-          <h2>5. 學習路線</h2>
-          <div class="tableWrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>階段</th>
-                  <th>重點</th>
-                  <th>建議做法</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>第 1 階段</td><td>動詞分類</td><td>每天 20 題，先把五段 / 一段 / 不規則判斷熟</td></tr>
-                <tr><td>第 2 階段</td><td>て形</td><td>從五段規則切入，練出反射</td></tr>
-                <tr><td>第 3 階段</td><td>ない形 / た形</td><td>用同一批動詞反覆練，建立系統感</td></tr>
-                <tr><td>第 4 階段</td><td>口說結合</td><td>開自動播放，跟著念，做到看到就能說</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-        </section>
+        <section class="card" id="plan"><h2>5. 學習路線</h2><div class="tableWrap"><table><thead><tr><th>階段</th><th>重點</th><th>建議做法</th></tr></thead><tbody><tr><td>第 1 階段</td><td>動詞分類</td><td>每天 20 題，先把五段 / 一段 / 不規則判斷熟</td></tr><tr><td>第 2 階段</td><td>て形</td><td>從五段規則切入，練出反射</td></tr><tr><td>第 3 階段</td><td>ない形 / た形</td><td>用同一批動詞反覆練，建立系統感</td></tr><tr><td>第 4 階段</td><td>聽力模式 + 錯題重複</td><td>不看字先聽音，錯題持續回來複習</td></tr></tbody></table></div></section>
       </main>
     </div>
-
+    <div class="siteFooter">Japanese Verb Trainer · Single-file learning site for GitHub Pages</div>
   </div>
 
   <script>
@@ -446,410 +187,240 @@
       { base:"行く", yomi:"いく", roma:"iku", zh:"去", cls:"godan", subgroup:"ku_gu_su", te:"行って", teYomi:"いって", teRoma:"itte", nai:"行かない", naiYomi:"いかない", naiRoma:"ikanai", ta:"行った", taYomi:"いった", taRoma:"itta", note:"例外：行く → 行って / 行かない / 行った" }
     ];
 
-    const $ = (id) => document.getElementById(id);
+    const $ = id => document.getElementById(id);
     const el = {
       modeBtns: Array.from(document.querySelectorAll('.modeBtn')),
       choiceBtns: Array.from(document.querySelectorAll('.choiceBtn')),
-      autoPlay: $('autoPlay'),
-      autoReveal: $('autoReveal'),
-      loopMode: $('loopMode'),
-      showMeaning: $('showMeaning'),
-      packSelect: $('packSelect'),
-      countSelect: $('countSelect'),
-      unlockAudioBtn: $('unlockAudioBtn'),
-      nextBtn: $('nextBtn'),
-      showBtn: $('showBtn'),
-      speakBtn: $('speakBtn'),
-      speakAnsBtn: $('speakAnsBtn'),
-      resetBtn: $('resetBtn'),
-      typeBadge: $('typeBadge'),
-      countdownText: $('countdownText'),
-      verbText: $('verbText'),
-      readingText: $('readingText'),
-      choiceArea: $('choiceArea'),
-      answerBox: $('answerBox'),
-      answerMain: $('answerMain'),
-      answerSub: $('answerSub'),
-      statusBox: $('statusBox'),
-      kTotal: $('kTotal'),
-      kCorrect: $('kCorrect'),
-      kWrong: $('kWrong'),
-      kAuto: $('kAuto'),
-      kManual: $('kManual'),
-      verbListBody: $('verbListBody')
+      autoPlay: $('autoPlay'), autoReveal: $('autoReveal'), loopMode: $('loopMode'), showMeaning: $('showMeaning'),
+      listeningMode: $('listeningMode'), wrongRepeatMode: $('wrongRepeatMode'),
+      packSelect: $('packSelect'), countSelect: $('countSelect'), unlockAudioBtn: $('unlockAudioBtn'), nextBtn: $('nextBtn'), showBtn: $('showBtn'), speakBtn: $('speakBtn'), speakAnsBtn: $('speakAnsBtn'), resetBtn: $('resetBtn'),
+      typeBadge: $('typeBadge'), countdownText: $('countdownText'), verbText: $('verbText'), readingText: $('readingText'), listenMask: $('listenMask'), choiceArea: $('choiceArea'), answerBox: $('answerBox'), answerMain: $('answerMain'), answerSub: $('answerSub'), statusBox: $('statusBox'),
+      kTotal: $('kTotal'), kCorrect: $('kCorrect'), kWrong: $('kWrong'), kAuto: $('kAuto'), kManual: $('kManual'), kWrongPool: $('kWrongPool'), kRepeatUsed: $('kRepeatUsed'), verbListBody: $('verbListBody')
     };
+
+    const STORAGE_KEY = 'verb_trainer_state_v1';
 
     const state = {
-      mode: 'classify',
-      current: null,
-      total: 0,
-      correct: 0,
-      wrong: 0,
-      autoCount: 0,
-      manualCount: 0,
-      revealTimer: null,
-      nextTimer: null,
-      tickTimer: null,
-      speechUnlocked: false
+      mode:'classify', current:null, total:0, correct:0, wrong:0, autoCount:0, manualCount:0, wrongPoolCount:0, repeatUsed:0,
+      revealTimer:null, nextTimer:null, tickTimer:null, speechUnlocked:false, wrongQueue:[], lastWrongBase:null
     };
 
-    function renderVerbList(){
-      el.verbListBody.innerHTML = verbs.map(v => `
-        <tr>
-          <td>${v.base}</td>
-          <td>${v.yomi} (${v.roma})</td>
-          <td>${v.zh}</td>
-        </tr>
-      `).join('');
+    function saveState(){
+      try{
+        const payload = {
+          mode: state.mode,
+          total: state.total,
+          correct: state.correct,
+          wrong: state.wrong,
+          autoCount: state.autoCount,
+          manualCount: state.manualCount,
+          repeatUsed: state.repeatUsed,
+          wrongQueueBases: state.wrongQueue.map(v => v.base),
+          autoPlay: el.autoPlay.checked,
+          autoReveal: el.autoReveal.checked,
+          loopMode: el.loopMode.checked,
+          showMeaning: el.showMeaning.checked,
+          listeningMode: el.listeningMode.checked,
+          wrongRepeatMode: el.wrongRepeatMode.checked,
+          packSelect: el.packSelect.value,
+          countSelect: el.countSelect.value
+        };
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      }catch(err){
+        console.warn('saveState failed', err);
+      }
     }
 
-    function poolByPack(){
-      const v = el.packSelect.value;
-      if (v === 'mixed') return verbs.slice();
-      if (v === 'godan_only') return verbs.filter(x => x.cls === 'godan');
-      if (v === 'ichidan_only') return verbs.filter(x => x.cls === 'ichidan');
-      if (v === 'irregular_only') return verbs.filter(x => x.cls === 'irregular');
-      return verbs.filter(x => x.subgroup === v);
+    function loadState(){
+      try{
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const data = JSON.parse(raw);
+        state.mode = data.mode || 'classify';
+        state.total = Number(data.total || 0);
+        state.correct = Number(data.correct || 0);
+        state.wrong = Number(data.wrong || 0);
+        state.autoCount = Number(data.autoCount || 0);
+        state.manualCount = Number(data.manualCount || 0);
+        state.repeatUsed = Number(data.repeatUsed || 0);
+
+        if (typeof data.autoPlay === 'boolean') el.autoPlay.checked = data.autoPlay;
+        if (typeof data.autoReveal === 'boolean') el.autoReveal.checked = data.autoReveal;
+        if (typeof data.loopMode === 'boolean') el.loopMode.checked = data.loopMode;
+        if (typeof data.showMeaning === 'boolean') el.showMeaning.checked = data.showMeaning;
+        if (typeof data.listeningMode === 'boolean') el.listeningMode.checked = data.listeningMode;
+        if (typeof data.wrongRepeatMode === 'boolean') el.wrongRepeatMode.checked = data.wrongRepeatMode;
+        if (data.packSelect) el.packSelect.value = data.packSelect;
+        if (data.countSelect) el.countSelect.value = data.countSelect;
+
+        const bases = Array.isArray(data.wrongQueueBases) ? data.wrongQueueBases : [];
+        state.wrongQueue = bases.map(base => verbs.find(v => v.base === base)).filter(Boolean);
+        state.wrongPoolCount = state.wrongQueue.length;
+      }catch(err){
+        console.warn('loadState failed', err);
+      }
+    }
+
+    function renderVerbList(){ el.verbListBody.innerHTML = verbs.map(v => `<tr><td>${v.base}</td><td>${v.yomi} (${v.roma})</td><td>${v.zh}</td></tr>`).join(''); }
+    function poolByPack(){ const v=el.packSelect.value; if(v==='mixed') return verbs.slice(); if(v==='godan_only') return verbs.filter(x=>x.cls==='godan'); if(v==='ichidan_only') return verbs.filter(x=>x.cls==='ichidan'); if(v==='irregular_only') return verbs.filter(x=>x.cls==='irregular'); return verbs.filter(x=>x.subgroup===v); }
+
+    function enqueueWrong(v){
+      if (!el.wrongRepeatMode.checked) return;
+      const exists = state.wrongQueue.some(x => x.base === v.base);
+      if (!exists) state.wrongQueue.push(v);
+      state.wrongPoolCount = state.wrongQueue.length;
+      updateKPI();
+      saveState();
+    }
+    function dequeueWrong(base){
+      state.wrongQueue = state.wrongQueue.filter(x => x.base !== base);
+      state.wrongPoolCount = state.wrongQueue.length;
+      updateKPI();
+      saveState();
     }
 
     function pickOne(){
+      if (el.wrongRepeatMode.checked && state.wrongQueue.length > 0 && Math.random() < 0.45) {
+        const idx = Math.floor(Math.random() * state.wrongQueue.length);
+        const picked = state.wrongQueue[idx];
+        state.repeatUsed++;
+        updateKPI();
+        saveState();
+        return picked;
+      }
       let pool = poolByPack();
       if (!pool.length) pool = verbs.slice();
-      let next = pool[Math.floor(Math.random() * pool.length)];
+      let next = pool[Math.floor(Math.random()*pool.length)];
       if (state.current && pool.length > 1){
         let guard = 0;
-        while(next.base === state.current.base && guard < 8){
-          next = pool[Math.floor(Math.random() * pool.length)];
-          guard++;
-        }
+        while(next.base === state.current.base && guard < 8){ next = pool[Math.floor(Math.random()*pool.length)]; guard++; }
       }
       return next;
     }
 
-    function clearTimers(){
-      clearTimeout(state.revealTimer);
-      clearTimeout(state.nextTimer);
-      clearInterval(state.tickTimer);
-      state.revealTimer = null;
-      state.nextTimer = null;
-      state.tickTimer = null;
-    }
+    function clearTimers(){ clearTimeout(state.revealTimer); clearTimeout(state.nextTimer); clearInterval(state.tickTimer); state.revealTimer=null; state.nextTimer=null; state.tickTimer=null; }
+    function isLineBrowser(){ return /Line\//i.test(navigator.userAgent) || /LIFF/i.test(navigator.userAgent); }
+    function buildExternalUrl(){ const url = new URL(window.location.href); url.searchParams.set('openExternalBrowser','1'); return url.toString(); }
+    function setupLineExternalOpen(){ const tip=$('lineAudioTip'); const btn=$('openExternalBtn'); if(!tip||!btn) return; if(isLineBrowser()){ tip.style.display='block'; btn.href=buildExternalUrl(); btn.target='_blank'; btn.rel='noopener noreferrer'; } else tip.style.display='none'; }
+    function toKatakana(str){ return str.replace(/[\u3041-\u3096]/g, ch => String.fromCharCode(ch.charCodeAt(0)+0x60)); }
+    function speak(text, lang='ja-JP'){ if(!('speechSynthesis' in window) || !text) return; try{ const u = new SpeechSynthesisUtterance(toKatakana(text)); u.lang='ja-JP'; const voices=window.speechSynthesis.getVoices(); const jaVoice = voices.find(v=>v.lang==='ja-JP') || voices.find(v=>v.lang && v.lang.toLowerCase().startsWith('ja')) || null; if(jaVoice) u.voice=jaVoice; u.rate=0.9; u.pitch=1.0; window.speechSynthesis.cancel(); window.speechSynthesis.speak(u);} catch(err){ console.warn(err); if(isLineBrowser()) alert('LINE 內建瀏覽器可能無法播放朗讀，請改用外部瀏覽器開啟。'); } }
+    function unlockAudio(){ if(state.speechUnlocked) return; state.speechUnlocked=true; try{ if('speechSynthesis' in window){ const u = new SpeechSynthesisUtterance(' '); u.lang='ja-JP'; u.volume=0; u.rate=1; u.pitch=1; window.speechSynthesis.cancel(); window.speechSynthesis.speak(u); } } catch(err){ console.warn(err); } setStatus(isLineBrowser() ? '已嘗試解鎖音訊；若仍無聲，請按綠色按鈕改用瀏覽器開啟。' : '音訊已嘗試解鎖。','good'); }
+    function setStatus(msg,type=''){ el.statusBox.className='status'+(type?` ${type}`:''); el.statusBox.innerHTML=msg; }
+    function updateKPI(){ el.kTotal.textContent=state.total; el.kCorrect.textContent=state.correct; el.kWrong.textContent=state.wrong; el.kAuto.textContent=state.autoCount; el.kManual.textContent=state.manualCount; el.kWrongPool.textContent=state.wrongPoolCount; el.kRepeatUsed.textContent=state.repeatUsed; }
+    function modeLabel(){ return {classify:'分類訓練',te:'て形',nai:'ない形',ta:'た形'}[state.mode] || '分類訓練'; }
+    function packLabel(){ return {mixed:'綜合題庫',godan_only:'五段動詞',ichidan_only:'一段動詞',irregular_only:'不規則動詞',u_tsu_ru:'う／つ／る 系',bu_mu_nu:'ぶ／む／ぬ 系',ku_gu_su:'く／ぐ／す 系'}[el.packSelect.value] || '綜合題庫'; }
+    function updateBadge(){ const extras=[]; if(el.listeningMode.checked) extras.push('聽力'); if(el.wrongRepeatMode.checked) extras.push('錯題重複'); el.typeBadge.textContent=`模式：${modeLabel()}｜題型：${packLabel()}${extras.length ? '｜' + extras.join('・') : ''}`; }
+    function targetFields(v){ if(state.mode==='te') return {form:'て形',text:v.te,yomi:v.teYomi,roma:v.teRoma}; if(state.mode==='nai') return {form:'ない形',text:v.nai,yomi:v.naiYomi,roma:v.naiRoma}; if(state.mode==='ta') return {form:'た形',text:v.ta,yomi:v.taYomi,roma:v.taRoma}; return null; }
 
-    function isLineBrowser(){
-      return /Line\//i.test(navigator.userAgent) || /LIFF/i.test(navigator.userAgent);
-    }
-
-    function buildExternalUrl(){
-      const url = new URL(window.location.href);
-      url.searchParams.set('openExternalBrowser', '1');
-      return url.toString();
-    }
-
-    function setupLineExternalOpen(){
-      const tip = document.getElementById('lineAudioTip');
-      const btn = document.getElementById('openExternalBtn');
-      if (!tip || !btn) return;
-      if (isLineBrowser()) {
-        tip.style.display = 'block';
-        btn.href = buildExternalUrl();
-        btn.target = '_blank';
-        btn.rel = 'noopener noreferrer';
-      } else {
-        tip.style.display = 'none';
-      }
-    }
-
-function toKatakana(str){
-  return str.replace(/[\u3041-\u3096]/g, ch =>
-    String.fromCharCode(ch.charCodeAt(0) + 0x60)
-  );
-}
-
-function speak(text, lang = 'ja-JP'){
-  if (!('speechSynthesis' in window) || !text) return;
-
-  try{
-    // ✅ 將平假名轉成片假名，減少誤讀（例如 はなす 被念成 wanasu）
-    const speakText = toKatakana(text);
-
-    const u = new SpeechSynthesisUtterance(speakText);
-    u.lang = 'ja-JP';
-
-    const voices = window.speechSynthesis.getVoices();
-
-    // ✅ 優先精準抓 ja-JP，再退而求其次抓 ja*
-    const jaVoice =
-      voices.find(v => v.lang === 'ja-JP') ||
-      voices.find(v => v.lang && v.lang.toLowerCase().startsWith('ja')) ||
-      null;
-
-    if (jaVoice) u.voice = jaVoice;
-
-    u.rate = 0.9;
-    u.pitch = 1.0;
-
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(u);
-
-  }catch(err){
-    console.warn(err);
-    if (isLineBrowser()) {
-      alert('LINE 內建瀏覽器可能無法播放朗讀，請改用外部瀏覽器開啟。');
-    }
-  }
-}
-
-function unlockAudio(){
-  if (state.speechUnlocked) return;
-
-  state.speechUnlocked = true;
-
-  try{
-    if ('speechSynthesis' in window){
-      const u = new SpeechSynthesisUtterance(' ');
-      u.lang = 'ja-JP';
-      u.volume = 0;
-      u.rate = 1;
-      u.pitch = 1;
-      window.speechSynthesis.cancel();
-      window.speechSynthesis.speak(u);
-    }
-  }catch(err){
-    console.warn(err);
-  }
-
-  if (isLineBrowser()) {
-    setStatus('已嘗試解鎖音訊；若仍無聲，請按綠色按鈕改用瀏覽器開啟。', 'good');
-  } else {
-    setStatus('音訊已嘗試解鎖。', 'good');
-  }
-}
-
-    function setStatus(msg, type=''){
-      el.statusBox.className = 'status' + (type ? ` ${type}` : '');
-      el.statusBox.innerHTML = msg;
-    }
-
-    function updateKPI(){
-      el.kTotal.textContent = state.total;
-      el.kCorrect.textContent = state.correct;
-      el.kWrong.textContent = state.wrong;
-      el.kAuto.textContent = state.autoCount;
-      el.kManual.textContent = state.manualCount;
-    }
-
-    function modeLabel(){
-      return { classify:'分類訓練', te:'て形', nai:'ない形', ta:'た形' }[state.mode] || '分類訓練';
-    }
-
-    function packLabel(){
-      return {
-        mixed:'綜合題庫',
-        godan_only:'五段動詞',
-        ichidan_only:'一段動詞',
-        irregular_only:'不規則動詞',
-        u_tsu_ru:'う／つ／る 系',
-        bu_mu_nu:'ぶ／む／ぬ 系',
-        ku_gu_su:'く／ぐ／す 系'
-      }[el.packSelect.value] || '綜合題庫';
-    }
-
-    function updateBadge(){
-      el.typeBadge.textContent = `模式：${modeLabel()}｜題型：${packLabel()}`;
-    }
-
-    function targetFields(v){
-      if (state.mode === 'te') return { form:'て形', text:v.te, yomi:v.teYomi, roma:v.teRoma };
-      if (state.mode === 'nai') return { form:'ない形', text:v.nai, yomi:v.naiYomi, roma:v.naiRoma };
-      if (state.mode === 'ta') return { form:'た形', text:v.ta, yomi:v.taYomi, roma:v.taRoma };
-      return null;
+    function updatePromptDisplay(v){
+      const listening = el.listeningMode.checked;
+      const hideText = listening && !el.answerBox.classList.contains('shown');
+      el.listenMask.classList.toggle('hidden', !hideText);
+      el.verbText.textContent = hideText ? '♪' : v.base;
+      el.readingText.textContent = hideText ? '請先聽音後作答' : `${v.yomi} ｜ ${v.roma}`;
     }
 
     function renderQuestion(v){
-      el.verbText.textContent = v.base;
-      el.readingText.textContent = `${v.yomi} ｜ ${v.roma}`;
-      el.answerBox.classList.add('hidden');
-      el.answerMain.textContent = '—';
-      el.answerSub.textContent = '—';
-      el.choiceBtns.forEach(b => { b.disabled = false; b.classList.remove('correct','wrong'); });
+      el.answerBox.classList.add('hidden'); el.answerBox.classList.remove('shown');
+      el.answerMain.textContent='—'; el.answerSub.textContent='—';
+      el.choiceBtns.forEach(b => { b.disabled=false; b.classList.remove('correct','wrong'); });
+      updatePromptDisplay(v);
+      if(state.mode==='classify'){ el.choiceArea.classList.remove('hidden'); el.showBtn.disabled=true; el.speakAnsBtn.disabled=true; setStatus(el.listeningMode.checked ? '聽力模式：先聽音，再判斷是五段 / 一段 / 不規則。' : '請判斷這個動詞是：五段動詞 / 一段動詞 / 不規則動詞。'); }
+      else { el.choiceArea.classList.add('hidden'); el.showBtn.disabled=false; el.speakAnsBtn.disabled=false; const t=targetFields(v); setStatus(el.listeningMode.checked ? `聽力模式：先聽音，再心中回答 ${t.form}。` : `先自己回答 ${t.form}，再按「顯示答案」。提示：${v.note}`); }
+    }
 
-      if (state.mode === 'classify'){
-        el.choiceArea.classList.remove('hidden');
-        el.showBtn.disabled = true;
-        el.speakAnsBtn.disabled = true;
-        setStatus('請判斷這個動詞是：五段動詞 / 一段動詞 / 不規則動詞。', '');
-      } else {
-        el.choiceArea.classList.add('hidden');
-        el.showBtn.disabled = false;
-        el.speakAnsBtn.disabled = false;
-        const t = targetFields(v);
-        setStatus(`先自己回答 ${t.form}，再按「顯示答案」。提示：${v.note}`, '');
-      }
+    function autoAdvanceAfterAnswer(){
+      if (!el.loopMode.checked) return;
+      state.nextTimer = setTimeout(nextQuestion, 1200);
     }
 
     function renderAnswer(mode='manual'){
-      if (!state.current || state.mode === 'classify') return;
-      const v = state.current;
-      const t = targetFields(v);
-      el.answerBox.classList.remove('hidden');
-      el.answerMain.textContent = `${t.text}`;
-      const zh = el.showMeaning.checked ? ` ｜ 中文：${v.zh}` : '';
-      el.answerSub.textContent = `${t.yomi} ｜ ${t.roma} ｜ 規則：${v.note}${zh}`;
-      if (mode === 'auto') state.autoCount++;
-      if (mode === 'manual') state.manualCount++;
-      setStatus(`${mode === 'auto' ? '已自動' : '已手動'}顯示答案：${v.base} → ${t.text}`, 'good');
-      updateKPI();
-      if (el.autoPlay.checked && state.speechUnlocked){
-        setTimeout(() => speak(t.yomi, 'ja-JP'), 80);
-      }
-      if (el.loopMode.checked && mode === 'auto'){
-        state.nextTimer = setTimeout(nextQuestion, 1200);
-      }
+      if(!state.current || state.mode==='classify') return;
+      const v=state.current; const t=targetFields(v);
+      el.answerBox.classList.remove('hidden'); el.answerBox.classList.add('shown');
+      el.answerMain.textContent=t.text; const zh=el.showMeaning.checked ? ` ｜ 中文：${v.zh}` : '';
+      el.answerSub.textContent=`${t.yomi} ｜ ${t.roma} ｜ 規則：${v.note}${zh}`;
+      updatePromptDisplay(v);
+      if(mode==='auto') state.autoCount++; if(mode==='manual') state.manualCount++;
+      setStatus(`${mode==='auto'?'已自動':'已手動'}顯示答案：${v.base} → ${t.text}`,'good'); updateKPI(); saveState();
+      if(el.autoPlay.checked && state.speechUnlocked) setTimeout(() => speak(t.yomi,'ja-JP'), 80);
+      autoAdvanceAfterAnswer();
     }
 
     function showClassificationResult(isCorrect, chosen){
-      const v = state.current;
-      const clsMap = { godan:'五段動詞', ichidan:'一段動詞', irregular:'不規則動詞' };
-      el.answerBox.classList.remove('hidden');
-      el.answerMain.textContent = `${clsMap[v.cls]}`;
-      const zh = el.showMeaning.checked ? ` ｜ 中文：${v.zh}` : '';
-      el.answerSub.textContent = `原形：${v.base} ｜ ${v.yomi} ｜ ${v.roma} ｜ 規則：${v.note}${zh}`;
-      const btn = el.choiceBtns.find(b => b.dataset.choice === chosen);
-      const correctBtn = el.choiceBtns.find(b => b.dataset.choice === v.cls);
-      if (btn && chosen !== v.cls) btn.classList.add('wrong');
-      if (correctBtn) correctBtn.classList.add('correct');
-      el.choiceBtns.forEach(b => b.disabled = true);
-      if (isCorrect){
-        state.correct++;
-        setStatus(`答對：${v.base} 是 ${clsMap[v.cls]}`, 'good');
+      const v=state.current; const clsMap={godan:'五段動詞',ichidan:'一段動詞',irregular:'不規則動詞'};
+      el.answerBox.classList.remove('hidden'); el.answerBox.classList.add('shown');
+      el.answerMain.textContent=clsMap[v.cls]; const zh=el.showMeaning.checked ? ` ｜ 中文：${v.zh}` : '';
+      el.answerSub.textContent=`原形：${v.base} ｜ ${v.yomi} ｜ ${v.roma} ｜ 規則：${v.note}${zh}`;
+      updatePromptDisplay(v);
+      const btn=el.choiceBtns.find(b=>b.dataset.choice===chosen); const correctBtn=el.choiceBtns.find(b=>b.dataset.choice===v.cls);
+      if(btn && chosen!==v.cls) btn.classList.add('wrong'); if(correctBtn) correctBtn.classList.add('correct'); el.choiceBtns.forEach(b=>b.disabled=true);
+      if(isCorrect){ state.correct++; dequeueWrong(v.base); setStatus(`答對：${v.base} 是 ${clsMap[v.cls]}`,'good'); }
+      else { state.wrong++; enqueueWrong(v); setStatus(`答錯：${v.base} 是 ${clsMap[v.cls]}，不是 ${clsMap[chosen]}`,'bad'); }
+      updateKPI(); saveState(); if(el.autoPlay.checked && state.speechUnlocked) setTimeout(()=>speak(v.yomi,'ja-JP'),80);
+      if (el.autoReveal.checked) autoAdvanceAfterAnswer();
+    }
+
+    function revealAndAdvanceByRule(){
+      if(state.mode === 'classify'){
+        if(el.autoReveal.checked){
+          const v = state.current; const clsMap={godan:'五段動詞',ichidan:'一段動詞',irregular:'不規則動詞'};
+          el.answerBox.classList.remove('hidden'); el.answerBox.classList.add('shown');
+          el.answerMain.textContent=clsMap[v.cls];
+          const zh=el.showMeaning.checked ? ` ｜ 中文：${v.zh}` : '';
+          el.answerSub.textContent=`原形：${v.base} ｜ ${v.yomi} ｜ ${v.roma} ｜ 規則：${v.note}${zh}`;
+          updatePromptDisplay(v);
+          setStatus(`時間到：正解是 ${clsMap[v.cls]}`,'good');
+          autoAdvanceAfterAnswer();
+        } else if (el.loopMode.checked) {
+          nextQuestion();
+        }
       } else {
-        state.wrong++;
-        setStatus(`答錯：${v.base} 是 ${clsMap[v.cls]}，不是 ${clsMap[chosen]}`, 'bad');
-      }
-      updateKPI();
-      if (el.autoPlay.checked && state.speechUnlocked){
-        setTimeout(() => speak(v.yomi, 'ja-JP'), 80);
-      }
-      if (el.loopMode.checked){
-        state.nextTimer = setTimeout(nextQuestion, 1200);
+        if(el.autoReveal.checked) renderAnswer('auto');
+        else if (el.loopMode.checked) nextQuestion();
       }
     }
 
     function startCountdownAndMaybeReveal(){
-      clearTimers();
-      const ms = Number(el.countSelect.value || 500);
-      const started = performance.now();
-      function tick(){
-        const left = Math.max(0, ms - (performance.now() - started));
-        el.countdownText.textContent = `請在 ${(left / 1000).toFixed(1)} 秒內作答`;
-        if (left <= 0){
-          clearInterval(state.tickTimer);
-          state.tickTimer = null;
-          el.countdownText.textContent = state.mode === 'classify' ? '時間到，請選擇類型' : '時間到，可自行核對答案';
-        }
-      }
-      tick();
-      state.tickTimer = setInterval(tick, 50);
-
-      if (el.autoReveal.checked && state.mode !== 'classify'){
-        state.revealTimer = setTimeout(() => renderAnswer('auto'), ms);
-      }
+      clearTimers(); const ms=Number(el.countSelect.value||500); const started=performance.now();
+      function tick(){ const left=Math.max(0, ms-(performance.now()-started)); el.countdownText.textContent=`請在 ${(left/1000).toFixed(1)} 秒內作答`; if(left<=0){ clearInterval(state.tickTimer); state.tickTimer=null; el.countdownText.textContent='時間到'; }}
+      tick(); state.tickTimer=setInterval(tick,50); state.revealTimer=setTimeout(revealAndAdvanceByRule, ms);
     }
 
-function nextQuestion(){
-  clearTimers();
-
-  // ✅ 第一次按開始 / 下一題時，先解鎖
-  if (!state.speechUnlocked) {
-    unlockAudio();
-  }
-
-  state.current = pickOne();
-  state.total++;
-  updateKPI();
-  renderQuestion(state.current);
-  startCountdownAndMaybeReveal();
-
-  if (el.autoPlay.checked && state.speechUnlocked){
-    // ✅ 第一次題目延遲久一點，避免和 unlockAudio 衝突
-    const delay = state.total === 1 ? 300 : 80;
-    setTimeout(() => speak(state.current.yomi, 'ja-JP'), delay);
-  }
-}
+    function nextQuestion(){
+      clearTimers(); if(!state.speechUnlocked) unlockAudio();
+      state.current=pickOne(); state.total++; updateKPI(); saveState(); renderQuestion(state.current); startCountdownAndMaybeReveal();
+      if(el.autoPlay.checked && state.speechUnlocked){ const delay = state.total===1 ? 300 : 120; setTimeout(()=>speak(state.current.yomi,'ja-JP'), delay); }
+    }
 
     function resetStats(){
-      state.total = 0;
-      state.correct = 0;
-      state.wrong = 0;
-      state.autoCount = 0;
-      state.manualCount = 0;
-      clearTimers();
-      el.verbText.textContent = '—';
-      el.readingText.textContent = '—';
-      el.answerBox.classList.add('hidden');
-      el.choiceArea.classList.add('hidden');
-      el.countdownText.textContent = '請按「開始/ 下一題」開始';
-      setStatus('統計已重置。', 'good');
-      updateKPI();
+      state.total=0; state.correct=0; state.wrong=0; state.autoCount=0; state.manualCount=0; state.wrongPoolCount=0; state.repeatUsed=0; state.wrongQueue=[];
+      clearTimers(); el.verbText.textContent='—'; el.readingText.textContent='—'; el.answerBox.classList.add('hidden'); el.answerBox.classList.remove('shown'); el.choiceArea.classList.add('hidden'); el.listenMask.classList.add('hidden'); el.countdownText.textContent='請按「開始 / 下一題」開始';
+      setStatus('統計已重置。','good'); updateKPI(); saveState();
     }
 
-    el.modeBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        state.mode = btn.dataset.mode;
-        el.modeBtns.forEach(b => b.classList.toggle('active', b === btn));
-        updateBadge();
-        setStatus(`已切換到 ${modeLabel()} 模式。`, 'good');
-        el.showBtn.disabled = state.mode === 'classify';
-        el.speakAnsBtn.disabled = state.mode === 'classify';
-      });
-    });
-
-    el.choiceBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        if (!state.current || state.mode !== 'classify') return;
-        showClassificationResult(btn.dataset.choice === state.current.cls, btn.dataset.choice);
-      });
-    });
-
-    if (el.unlockAudioBtn) {
-      el.unlockAudioBtn.addEventListener('click', unlockAudio);
-    }
-    el.nextBtn.addEventListener('click', nextQuestion);
-    el.showBtn.addEventListener('click', () => renderAnswer('manual'));
-    el.speakBtn.addEventListener('click', () => {
-      if (!state.current) return;
-      state.speechUnlocked = true;
-      speak(state.current.yomi, 'ja-JP');
-    });
-    el.speakAnsBtn.addEventListener('click', () => {
-      if (!state.current || state.mode === 'classify') return;
-      state.speechUnlocked = true;
-      const t = targetFields(state.current);
-      speak(t.yomi, 'ja-JP');
-    });
+    el.modeBtns.forEach(btn => btn.addEventListener('click', () => {
+      state.mode=btn.dataset.mode; el.modeBtns.forEach(b=>b.classList.toggle('active', b===btn)); updateBadge(); setStatus(`已切換到 ${modeLabel()} 模式。`,'good'); el.showBtn.disabled = state.mode==='classify'; el.speakAnsBtn.disabled = state.mode==='classify'; saveState();
+    }));
+    el.choiceBtns.forEach(btn => btn.addEventListener('click', () => { if(!state.current || state.mode!=='classify') return; showClassificationResult(btn.dataset.choice===state.current.cls, btn.dataset.choice); }));
+    if(el.unlockAudioBtn) el.unlockAudioBtn.addEventListener('click', unlockAudio);
+    el.nextBtn.addEventListener('click', nextQuestion); el.showBtn.addEventListener('click', () => renderAnswer('manual'));
+    el.speakBtn.addEventListener('click', () => { if(!state.current) return; state.speechUnlocked=true; speak(state.current.yomi,'ja-JP'); });
+    el.speakAnsBtn.addEventListener('click', () => { if(!state.current || state.mode==='classify') return; state.speechUnlocked=true; const t=targetFields(state.current); speak(t.yomi,'ja-JP'); });
     el.resetBtn.addEventListener('click', resetStats);
-    el.packSelect.addEventListener('change', () => {
-      updateBadge();
-      setStatus('題庫範圍已切換。', 'good');
-    });
-
-    document.addEventListener('visibilitychange', () => {
-      if (document.hidden && 'speechSynthesis' in window){
-        try{ window.speechSynthesis.cancel(); }catch(err){}
-      }
-    });
-
+    [el.packSelect, el.listeningMode, el.wrongRepeatMode, el.autoPlay, el.autoReveal, el.loopMode, el.showMeaning, el.countSelect].forEach(node => node.addEventListener('change', () => { updateBadge(); if(state.current) updatePromptDisplay(state.current); setStatus('設定已更新。','good'); saveState(); }));
+    document.addEventListener('visibilitychange', () => { if(document.hidden && 'speechSynthesis' in window){ try{ window.speechSynthesis.cancel(); }catch(err){} } });
     document.addEventListener('DOMContentLoaded', () => {
+      loadState();
       setupLineExternalOpen();
-
       renderVerbList();
+      el.modeBtns.forEach(b=>b.classList.toggle('active', b.dataset.mode === state.mode));
       updateBadge();
       updateKPI();
-      el.showBtn.disabled = true;
-      el.speakAnsBtn.disabled = true;
-      if ('speechSynthesis' in window){
-        try{ window.speechSynthesis.getVoices(); }catch(err){}
-      }
+      el.showBtn.disabled = state.mode==='classify';
+      el.speakAnsBtn.disabled = state.mode==='classify';
+      if('speechSynthesis' in window){ try{ window.speechSynthesis.getVoices(); }catch(err){} }
+      setStatus('已載入上次的統計與錯題池。','good');
     });
   </script>
 </body>
